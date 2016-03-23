@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block rankmenu %}
+        <div class="col-sm-3 col-md-2 sidebar">
+            <div align="left" style="margin-left: 10%">
+             <img width="180px" height="70px" src="{% static "images/logo.jpg" %}" alt="Picture of Rango" /> <!-- New line -->
+            <ul class="nav nav-sidebar" style="font-size: 16pt">
+                <li><a href="../">Home</a></li>
+                <li role="presentation"><a href="../rank">Overview</a></li>
+            </ul>
+
+                <div class="form-group">
+
+                   <form  role="search" method='get' action="../searchandrank/">
+                       {% csrf_token %}
+
+                       <h3 style="font-weight: 600">Style</h3>
+                       <select class="form-control" id="id_dob_month" name="serachcategory">
+                           <option value="0">-</option>
+                           {% if style_list %}
+                               {% for category in category_list %}
+                                   <option value={{ category.name }}>{{ category.name }}</option>
+                               {% endfor %}
+                           {% else %}
+                               <strong>There are no category present.</strong>
+                           {% endif %}
+                       </select>
+
+                       <h3 style="font-weight: 600">Category</h3>
+                       <select class="form-control" id="id_dob_month" name="searchstyle">
+                           <option value="0">-</option>
+                           {% if style_list %}
+                               {% for style in style_list %}
+                                   <option value={{ style.name }}>{{ style.name }}</option>
+                               {% endfor %}
+                           {% else %}
+                               <strong>There are no style present.</strong>
+                           {% endif %}
+                       </select>
+                       <button type="submit" class="btn btn-info">Go and Search</button>
+                   </form>
+               </div>
+
+
+
+            </div>
+        </div>
+      {% endblock %}
+
+{% block body_block %}
+
+        <div class="row">
+            <div align="center" class="col-md-12" style="margin-left: -8%">
+                <h1>Results</h1>
+                <hr/>
+                <span>{{ result_list.count }} Search results</span>
+                <br/><br/>
+            </div>
+        </div>
+
+        <div class="table-responsive"style="margin-left:0%">
+            <table class="table table-striped" >
+              <thead >
+                <tr>
+                  <th>Name</th>
+                  <th>Category</th>
+                  <th>Style</th>
+                  <th>Likes</th>
+                  <th>Learn&Vote</th>
+                </tr>
+              </thead>
+                {% for food in result_list %}
+                    <tbody>
+                    <tr>
+                        <td><a href="http://127.0.0.1:8000/food/{{ food.foodid }}" >{{ food.title }}</a></td>
+                        <td>{{ food.category }}</td>
+                        <td>{{ food.style }}</td>
+                        <td>{{ food.likes }}</td>
+                        <td><img src="{{ food.url }}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail"></td>
+                </tr>
+                    </tbody>
+                 {% endfor %}
+            </table>
+          </div>
+
+
+{% endblock %}
+

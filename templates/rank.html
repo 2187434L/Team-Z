@@ -1,0 +1,105 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+      {% block rankmenu %}
+        <div class="col-sm-3 col-md-2 sidebar">
+            <div align="left" style="margin-left: 10%">
+             <div style="margin-left: -9%"><img width="180px" height="70px" src="{% static "images/logo.png" %}" alt="Picture of Rango" /></div> <!-- New line -->
+
+            <ul class="nav nav-sidebar" style="font-size: 16pt; margin-top: 5%">
+                <li><a href="../">Home</a></li>
+                <li role="presentation"><a href="../rank">Overview</a></li>
+            </ul>
+
+               <div class="form-group">
+
+                   <form  role="search" method='get' action="../searchandrank/">
+                       {% csrf_token %}
+
+                       <h3 style="font-weight: 600">Style</h3>
+                       <select class="form-control" id="id_dob_month" name="serachcategory">
+                           <option value="0">-</option>
+                           {% if style_list %}
+                               {% for category in category_list %}
+                                   <option value={{ category.name }}>{{ category.name }}</option>
+                               {% endfor %}
+                           {% else %}
+                               <strong>There are no category present.</strong>
+                           {% endif %}
+                       </select>
+
+                       <h3 style="font-weight: 600">Category</h3>
+                       <select class="form-control" id="id_dob_month" name="searchstyle">
+                           <option value="0">-</option>
+                           {% if style_list %}
+                               {% for style in style_list %}
+                                   <option value={{ style.name }}>{{ style.name }}</option>
+                               {% endfor %}
+                           {% else %}
+                               <strong>There are no style present.</strong>
+                           {% endif %}
+                       </select>
+                       <button type="submit" class="btn btn-info">Go and Search</button>
+                   </form>
+               </div>
+
+            </div>
+        </div>
+      {% endblock %}
+
+
+{% block body_block %}
+           <h4>
+
+
+    <h1 class="page-header">The top 3 food overview</h1>
+    <div class="row placeholders" align="center" style="margin-left: 5%">
+        {% if foods_Top3 %}
+            {% for food in foods_Top3 %}
+                <div class="col-xs-6 col-sm-3 placeholder" >
+              <img src="{{ food.url }}" width="350" height="250" class="img-responsive" alt="Generic placeholder thumbnail">
+               <h4>
+                   <a href="http://127.0.0.1:8000/food/{{ food.foodid }}" >{{ food.title }}</a></h4>
+              <span class="text-muted">Likes: {{ food.likes }}</span>
+            </div>
+            {% endfor %}
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
+     </div>
+    <h2 class="">Others</h2>
+    <div class="table-responsive"style="margin-left:0%">
+        <table class="table table-striped" >
+              <thead >
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Style</th>
+                    <th>Likes</th>
+                    <th>Learn&Vote</th>
+                </tr>
+              </thead>
+            {% if foods_Top10 %}
+            {% for food in foods_Top10 %}
+              <tbody align="left">
+                <tr>
+                <td><h4><a href="http://127.0.0.1:8000/food/{{ food.foodid }}" >{{ food.title }}</a></h4></td>
+                <td>{{ food.category }}</td>
+                <td>{{ food.style }}</td>
+                <td>{{ food.likes }}</td>
+                <td><img src="{{ food.url }}" width="200" height="200" class="img-responsive" ></td>
+                </tr>
+                </tbody>
+            {% endfor %}
+        {% else %}
+            <strong>There are no categories present.</strong>
+        {% endif %}
+
+    </table>
+    </div>
+
+
+
+
+{% endblock %}

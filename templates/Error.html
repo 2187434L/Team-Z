@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block body_block %}
+        <div class="jumbotron"  style="background-color: #ffffff">
+        <div class="container" style="background-color: #ffffff">
+
+            <body>
+            <h1>Sorry </h1>
+            <br>
+            <img width="400" height="300" src="{% static "images/sorry.png" %}" alt="Picture of Rango" /> <!-- New line -->
+
+            <div style="margin-left: 15%">
+                <a href="../" target="_parent"> <input class="btn btn-primary btn-lg" type="button" value="BackHome"></a>
+                <a href="../rank" target="_parent"> <input class="btn btn-primary btn-lg" type="button" value="GoRating"></a>
+                <a href="https://www.google.co.uk/" target="_parent"> <input class="btn btn-primary btn-lg" type="button" value="Search On Google &raquo;"></a>
+            </div>
+
+            </form>
+            </body>
+
+
+        </div>
+    </div>
+
+{% endblock %}
+
+ {% block body_bot %}
+      <div class="container">
+
+
+      </div>
+
+ {% endblock %}

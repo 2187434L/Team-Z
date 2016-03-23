@@ -1,0 +1,61 @@
+
+{% extends 'base.html' %}
+
+
+{% block body_block %}
+        <div class="jumbotron" >
+        <div class="container">
+            <title>Register</title>
+            <body>
+            <h1>Login </h1>
+            <br>
+
+            <form id="login_form" method="post" action="/login/">
+            {% csrf_token %}
+            Username:<br>
+            <input type="text" name="username" value="" size="50" />
+            <br /><br />
+            Password:<br>
+            <input type="password" name="password" value="" size="50" />
+            <br /> <br />
+            <div style="margin-left: 15%">
+                <a href="../register" target="_parent"> <input class="btn btn-primary btn-lg" type="button" value="RegistrHere"></a>
+                <input class="btn btn-primary btn-lg" type="submit" value="Login &raquo;">
+            </div>
+
+            </form>
+            </body>
+
+
+        </div>
+    </div>
+
+{% endblock %}
+
+ {% block body_bot %}
+      <div class="container">
+                   <div class="row">
+                       <div class="col-md-4">
+                           <h2>Braised Mushrooms in Abalone Sauce</h2>
+                           <p>A deluxe pot of braised shiitake mushrooms, dried scallops, dried oysters and abalone.</p>
+                           <p><a class="btn btn-default" href="http://127.0.0.1:8000/food/10" role="button">View details &raquo;</a></p>
+                       </div>
+                       <div class="col-md-4">
+                           <h2>Mixed Fruit Muffin</h2>
+                           <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                           <p><a class="btn btn-default" href="http://127.0.0.1:8000/food/22" role="button">View details &raquo;</a></p>
+                       </div>
+                       <div class="col-md-4">
+                           <h2>Golden Corn</h2>
+                           <p>This is a dish we used to order in restaurant. The sweet taste mixed with the salted egg yolk is just perfect. And it is fairly easy to make.</p>
+                           <p><a class="btn btn-default" href="http://127.0.0.1:8000/food/13" role="button">View details &raquo;</a></p>
+
+                       </div>
+
+                       <div class="col-md-4">
+
+                       </div>
+                   </div>
+               </div>
+
+ {% endblock %}
